@@ -1,0 +1,24 @@
+name: build and publish
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/helserisk-java-python:${{ github.sha }}
+  # d.v.s. docker.pkg.github.com/navikt/helserisk-java-python-image/helserisk-java-python:${{ github.sha }}
+
+jobs:
+  build:
+    name: Build and push Docker image
+    runs-on: ubuntu-latest
+    steps:
+      -  uses: actions/checkout@v1
+      -  name: Build and publish Docker image
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+           docker build --tag ${IMAGE} .
+           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
+           docker push ${IMAGE}
