@@ -1,4 +1,4 @@
-FROM navikt/java:12
+FROM navikt/java:17
 
 USER root
 RUN apt-get update -y
