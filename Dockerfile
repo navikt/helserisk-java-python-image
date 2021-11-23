@@ -2,7 +2,7 @@ FROM navikt/java:17
 
 USER root
 RUN apt-get update -y
-RUN apt-get install -y python3=3.6.7-1~18.04
+RUN apt-get install -y python3 #=3.6.15-1~18.04
 RUN apt-get install -y python3-pip
 RUN pip3 install --upgrade pip==21.0.1
 RUN pip3 --version
